@@ -1,0 +1,38 @@
+﻿.navbar-light .navbar-nav .nav-link {
+    color: #64CCC5;
+}
+
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+
+.search-box {
+    padding: 6px 27px;
+    background-color: #64CCC5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-left: 14px;
+    border-radius: 2px;
+}
+svg {
+    width: 15px;
+    height: 15px;
+}
+
+.search-text {
+    font-size: 15px;
+    color: white !important;
+    text-decoration: none;
+}
+
+.my-ultag {
+    font-size: 18px;
+}
+
+

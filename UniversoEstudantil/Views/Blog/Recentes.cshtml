@@ -1,0 +1,17 @@
+﻿@model IEnumerable<UniversoEstudantil.Models.Domain.BlogPost>
+
+@foreach (var post in Model)
+{
+    <div class="container mt-4">
+        <h1>Blogs</h1>
+        <h3>Titulo: @post.PageTitle</h3>
+        <p>
+            Autor: @post.Author <br>
+            Data: @post.PublishedDate <br>
+            Descrição: @post.ShortDescription <br>
+            CONTEÚDO: <br> @Html.Raw(post.Content)
+        </p>
+        <img src="@post.UrlImage" alt="Blog Image" />
+
+    </div>
+}

@@ -1,0 +1,68 @@
+﻿@model UniversoEstudantil.Models.ViewsModel.AddBlogRequest
+@{
+
+}
+
+
+
+
+<div class="p-2 align-items-center flex-grow-1 mb-4" style="background-color: rgba(100, 204, 197, 0.5);">
+    <h1 class="ms-5"> Postar Blog </h1>
+</div>
+
+<div class="container">
+    <form method="post" asp-controller="Blog" asp-action="Publicar">
+
+        <div class="mb-3">
+            <label class="form-label">Título da Página</label>
+            <input type="text" class="form-control" asp-for="PageTitle" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Conteúdo</label>
+            <textarea id="editor" class="form-control" asp-for="Content" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descrição Curta</label>
+            <input type="text" class="form-control" asp-for="ShortDescription" />
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlFile1">Upload de imagem</label>
+            <input type="file" class="form-control-file" name="imageFile" id="imageFile">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Url da Imagem</label>
+            <input type="text" class="form-control" asp-for="UrlImage" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Data de Publicação</label>
+            <input type="date" class="form-control" asp-for="PublishedDate" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Autor(a)</label>
+            <input type="text" class="form-control" asp-for="Author" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tags (separado por vírgulas)</label>
+            <input type="text" class="form-control" /> 
+        </div>
+
+        <div class="mb-3">
+            <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlInline" asp-for="Visible">
+                <label class="custom-control-label" for="customControlInline">Todos podem ler</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary my-1 ">Publicar</button>
+        <button type="reset" class="btn btn-danger my-1 ms-2">Deletar</button>
+
+
+    </form>
+</div>
