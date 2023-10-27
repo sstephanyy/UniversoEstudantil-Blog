@@ -1,20 +1,69 @@
 ﻿@model UniversoEstudantil.Models.Domain.BlogPost
 
-<div class="container-fluid">
-    <h1 class="mb-4">@Model.PageTitle</h1>
-    <div class="blog-post">
-        <img src="@Model.UrlImage" alt="Imagem da publicação" />
+<style>
+    .container-blog{
+        max-width: 700px;
+
+    }
+
+    .post-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .blog-info{
+        display:flex;
+        justify-content: space-between;
+        margin-bottom: 13px;
+        margin-top: -10px;
+    }
+
+    .post-image {
+        max-width: 100%; 
+        max-height: 380px; /*auto*/
+        border-radius: 2px 25px 0px 25px;
+        object-fit: cover;
+    }
+
+    .title-blog{
+       font-weight: 600;
+    }
+
+    .like-button{
+        margin-top: 2px;
+        cursor: pointer;
+    }
+
+</style>
+
+<div class="container-fluid container-blog mt-3">
+    <p class="mb-4 display-4 title-blog">@Model.PageTitle</p>
+
+  <div class="blog-info text-muted">
+        
+      <div class="info-item">
+            @Model.Author
+        </div>
+
+        <div class="info-item">
+            @Model.PublishedDate.ToString("dd/MM/yyyy")
+        </div>
+
+  </div>
+
+    <div class="text d-flex gap-2 ">
+            <p>2 Likes</p>
+            <img src="~/heart.png" alt="like icon" width="20px" height="20px" class="like-button"/>       
+  </div>
+
+    <div class="post-container">
+        <img src="@Model.UrlImage" alt="Imagem da publicação" class="post-image" />
 
         <div class="post-content">
-            <h3>@Model.PageTitle</h3>
+            <br>
             <p>
-                Autor: @Model.Author <br>
-                Data da Publicação: @Model.PublishedDate.ToString("dd/MM/yyyy") <br>
-            </p>
-
-            <p>
-                Descrição: @Model.ShortDescription <br>
-                Conteúdo:
+                @Model.ShortDescription
                 <br>
                 @Html.Raw(Model.Content)
             </p>
