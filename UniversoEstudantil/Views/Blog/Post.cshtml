@@ -1,0 +1,23 @@
+﻿@model UniversoEstudantil.Models.Domain.BlogPost
+
+<div class="container-fluid">
+    <h1 class="mb-4">@Model.PageTitle</h1>
+    <div class="blog-post">
+        <img src="@Model.UrlImage" alt="Imagem da publicação" />
+
+        <div class="post-content">
+            <h3>@Model.PageTitle</h3>
+            <p>
+                Autor: @Model.Author <br>
+                Data da Publicação: @Model.PublishedDate.ToString("dd/MM/yyyy") <br>
+            </p>
+
+            <p>
+                Descrição: @Model.ShortDescription <br>
+                Conteúdo:
+                <br>
+                @Html.Raw(Model.Content)
+            </p>
+        </div>
+    </div>
+</div>

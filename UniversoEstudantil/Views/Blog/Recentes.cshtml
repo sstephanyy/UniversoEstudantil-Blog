@@ -1,16 +1,73 @@
 ﻿@model IEnumerable<UniversoEstudantil.Models.Domain.BlogPost>
 
-@foreach (var post in Model)
-{
-    <div class="container mt-4">
-        <h1>Blogs</h1>
-        <h3>Titulo: @post.PageTitle</h3>
-        <p>
-            Autor: @post.Author <br>
-            Data: @post.PublishedDate <br>
-            Descrição: @post.ShortDescription <br>
-            CONTEÚDO: <br> @Html.Raw(post.Content)
-        </p>
+<style>
+    .container-post {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 39px;
+    }
 
+    .blog-post {
+        width: 300px;
+        height: 450px;
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        backdrop-filter: blur(7.5px);
+        -webkit-backdrop-filter: blur(7.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        display: flex;
+        flex-direction: column;
+    }
+
+        .blog-post img {
+            max-width: 100%;
+            height: 170px; /*max-height*/
+            object-fit: cover;
+        }
+
+    .post-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 16px;
+    }
+
+    .post-text{
+        margin-right: 8px;
+    }
+</style>
+
+<div class="container m-xl-5">
+    <h1 class="mb-4">Todos os Blogs</h1>
+    <div class="container-post">
+
+        @foreach (var post in Model)
+        {
+            <div class="blog-post">
+                <img src="@post.UrlImage" alt="Imagem da publicação" />
+
+                <div class="post-content">
+                    <h3>@post.PageTitle</h3>
+                    <p>
+                        Autor: @post.Author <br>
+                        Data da Publicação: @post.PublishedDate.ToString("dd/MM/yyyy") <br>
+                    </p>
+
+                    <p>
+                        @post.ShortDescription <br>
+                        @* CONTEÚDO: <br> @Html.Raw(post.Content) *@
+                    </p>
+
+                    @* Isso gera uma URL com base na ação "Post" do controlador "Blog" e inclui o título da página do post como um parâmetro *@
+                    <a asp-controller="Blog" asp-action="Post" asp-route-id="@post.Id" class="btn mb-2" style="background-color: #64CCC5;">Ler mais</a>
+
+
+
+                </div>
+            </div>
+        }
     </div>
-}
+
+</div>
