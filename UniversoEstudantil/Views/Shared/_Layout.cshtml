@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - UniversoEstudantil</title>
+    <title>Universo Estudantil</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/UniversoEstudantil.styles.css" asp-append-version="true" />
@@ -42,12 +42,12 @@
 
                     <div class="nav-item" style="margin-right: 50px;" >
                         <div class="nav-link search-box" style="background-color: #6941C6">
-                            <a class="search-text">Inscrever-se</a>
+                            <a href="@Url.Content("/Identity/Account/Register")" class="search-text">Inscrever-se</a>
 
                         </div>
 
                         <div class="nav-link search-box" style="background-color: #6941C6">
-                            <a class="search-text">Login</a>
+                            <a class="search-text" asp-area="Identity" asp-page="/Account/Login"> Login</a>
 
                         </div>
                     </div>
@@ -58,7 +58,7 @@
     </header>
     <div>
 
-        <main role="main" class="d-flex  flex-column">
+        <main role="main" class="d-flex flex-column">
             @RenderBody()
         </main>
     </div>
