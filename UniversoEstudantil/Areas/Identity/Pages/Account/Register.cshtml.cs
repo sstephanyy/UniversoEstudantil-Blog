@@ -71,12 +71,12 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "O campo nome é obrigatório.")]
             [DataType(DataType.Text)]
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "O campo sobrenome é obrigatório.")]
             [DataType(DataType.Text)]
             [Display(Name = "Sobrenome")]
             public string Sobrenome { get; set; }
@@ -85,7 +85,7 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "O campo email é obrigatório.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -94,8 +94,9 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            /// entre 6 a 13 caracteres
+            [Required(ErrorMessage = "O campo senha é obrigatório.")]
+            [StringLength(13, ErrorMessage = " A senha deve ter no mínimo 6 caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -104,9 +105,11 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            
+            [Required(ErrorMessage = "O campo confirmar senha é obrigatório.")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "A senha e a senha de confirmação não são iguais.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -123,10 +126,14 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new ApplicationUser
+                {
+                    Nome = Input.Nome,       // Set the Nome property
+                    Sobrenome = Input.Sobrenome, // Set the Sobrenome property
+                    UserName = Input.Email,
+                    Email = Input.Email
+                };
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

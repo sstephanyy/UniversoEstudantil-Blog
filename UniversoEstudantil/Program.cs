@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UniversoEstudantil.Data;
 using Microsoft.AspNetCore.Identity;
 using UniversoEstudantil.Areas.Identity.Data;
+using UniversoEstudantil.Views.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,12 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SharedConnection"));
 });
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthDbContext>();
+//.SignIn.RequireConfirmedAccount = false -> disable email verification when a user create an account
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<AuthDbContext>().AddErrorDescriber<LocalizedIdentityErrorMessages>();
+
+
+
+
 
 var app = builder.Build();
 

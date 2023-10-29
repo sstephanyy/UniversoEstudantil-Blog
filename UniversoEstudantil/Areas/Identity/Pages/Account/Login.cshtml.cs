@@ -65,7 +65,7 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "O campo email é obrigatório.")]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -73,7 +73,7 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "O campo senha é obrigatório.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -81,7 +81,7 @@ namespace UniversoEstudantil.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Lembre-se de mim?")]
             public bool RememberMe { get; set; }
         }
 

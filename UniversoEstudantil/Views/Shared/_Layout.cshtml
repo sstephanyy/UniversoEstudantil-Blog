@@ -40,17 +40,28 @@
            
                     </ul>
 
-                    <div class="nav-item" style="margin-right: 50px;" >
-                        <div class="nav-link search-box" style="background-color: #6941C6">
-                            <a href="@Url.Content("/Identity/Account/Register")" class="search-text">Inscrever-se</a>
+                    @{
+                        if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="nav-item" style="margin-right: 50px;">
+                                <div class="nav-link search-box" style="background-color: #6941C6">
+                                    <a href="@Url.Content("/Identity/Account/Register")" class="search-text">Inscrever-se</a>
+                                </div>
 
-                        </div>
+                                <div class="nav-link search-box" style="background-color: #6941C6">
+                                    <a class="search-text" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="nav-item" style="margin-right: 50px;">
 
-                        <div class="nav-link search-box" style="background-color: #6941C6">
-                            <a class="search-text" asp-area="Identity" asp-page="/Account/Login"> Login</a>
+                                <partial name="_LoginPartial.cshtml" />
+                            </div>
+                        }
+                    }
 
-                        </div>
-                    </div>
 
                 </div>
             </div>
