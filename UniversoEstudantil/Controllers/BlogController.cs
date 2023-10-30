@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using UniversoEstudantil.Data;
 using UniversoEstudantil.Models.Domain;
@@ -6,6 +7,8 @@ using UniversoEstudantil.Models.ViewsModel;
 
 namespace UniversoEstudantil.Controllers
 {
+
+    [Authorize] //somente users autorizados podem acessar esse controller
     public class BlogController : Controller
     {
         private readonly BlogDbContext _context;
@@ -44,6 +47,8 @@ namespace UniversoEstudantil.Controllers
 
         //send this created post to "Recentes" page
         [HttpGet]
+        [AllowAnonymous]
+
         public IActionResult Recentes()
         {
             // Retrieve a list of blog posts from your database

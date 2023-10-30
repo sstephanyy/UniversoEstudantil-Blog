@@ -7,8 +7,8 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item d-flex mx-4">
-            <img src="https://i.pinimg.com/280x280_RS/21/41/7b/21417bb0f367e90fdc078f6e1f40308f.jpg" style="width: 32px; height: 32px; border-radius: 50%;" />
+    <li class="nav-item d-flex mx-3">
+            <img src="https://i.pinimg.com/280x280_RS/21/41/7b/21417bb0f367e90fdc078f6e1f40308f.jpg" style="width: 32px; height: 32px; border-radius: 50%; border: 3px solid #6941C6;" />
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @UserManager.GetUserAsync(User).Result.Nome @UserManager.GetUserAsync(User).Result.Sobrenome</a>
     </li>
     <li class="nav-item">

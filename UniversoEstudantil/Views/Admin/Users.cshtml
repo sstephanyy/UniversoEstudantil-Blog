@@ -1,0 +1,64 @@
+﻿@model UniversoEstudantil.Models.ViewsModel.UserListViewModel
+
+@{
+    var userManager = Model.UserManager;
+    var users = userManager.Users;
+}
+
+
+<style>
+
+    table{
+        margin-top: 50px;
+    }
+
+    .add-user{
+        width:180px;
+        height: 35px;
+        border: none;
+        border-radius:2px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+       
+    }
+
+    
+</style>
+
+<div class="container  mt-5">
+    
+    <button class="add-user btn-dark">Adicionar usuário</button>
+
+    <table class="table table-striped container">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int increment = 1; // Declare the increment variable outside the loop
+            }
+            @foreach (var user in users)
+            {
+
+                <tr>
+                    <th scope="row">@increment</th>
+                    <th scope="row">@user.Id</th>
+                    <td>@user.Nome @user.Sobrenome</td>
+                    <td>@user.UserName</td>
+                    <td><button class="btn-danger border-0 rounded">Excluir</button></td>
+                </tr>
+                increment++;
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
