@@ -22,5 +22,5 @@ namespace UniversoEstudantil.Data
         public DbSet<ApplicationUser> Users { get; set; }
 
         //public int MyProperty { get; set; } //a table to connect these two database, because they hav a relationship
-    } 
+    }
 }

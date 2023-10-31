@@ -3,6 +3,7 @@ using UniversoEstudantil.Data;
 using Microsoft.AspNetCore.Identity;
 using UniversoEstudantil.Areas.Identity.Data;
 using UniversoEstudantil.Views.Shared;
+using UniversoEstudantil.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +22,17 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 });
 
 //.SignIn.RequireConfirmedAccount = false -> disable email verification when a user create an account
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<AuthDbContext>().AddErrorDescriber<LocalizedIdentityErrorMessages>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AuthDbContext>().AddErrorDescriber<LocalizedIdentityErrorMessages>();
 
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Admin/AccessDenied";
+});
+builder.Services.AddAuthentication().AddCookie();
 
 
 var app = builder.Build();
@@ -42,6 +50,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+await CriarPerfisUsersAsync(app);
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -50,4 +60,17 @@ app.MapControllerRoute(
 
 app.MapRazorPages(); // routes from idendity razor pages
 
+async Task CriarPerfisUsersAsync(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using(var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        await service.SeedRolesAsync();
+        await service.SeedUsersAsync();
+    }
+}
+
 app.Run();
+

@@ -6,7 +6,7 @@ using UniversoEstudantil.Models.ViewsModel;
 
 namespace UniversoEstudantil.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Gerente")]
     public class AdminController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -27,6 +27,13 @@ namespace UniversoEstudantil.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

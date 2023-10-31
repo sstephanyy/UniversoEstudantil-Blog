@@ -18,6 +18,7 @@ namespace UniversoEstudantil.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Adicionar()
         {
             return View();
@@ -48,7 +49,6 @@ namespace UniversoEstudantil.Controllers
         //send this created post to "Recentes" page
         [HttpGet]
         [AllowAnonymous]
-
         public IActionResult Recentes()
         {
             // Retrieve a list of blog posts from your database
@@ -58,6 +58,7 @@ namespace UniversoEstudantil.Controllers
         }
 
         [HttpGet("Blog/Post/{id}")]
+        [Authorize(Roles = "User, Admin, Gerente")]
         public IActionResult Post([FromRoute] string id)  // pegar o post com base no id
         {
             if (Guid.TryParse(id, out Guid idGuid))
